@@ -27,29 +27,29 @@ class App extends React.Component {
   render() {
     return (
       <div style={{ width: '50%', margin: 'auto' }}>
-        <Carousel
-          transitionMode={this.state.transitionMode}
-          cellAlign={this.state.cellAlign}
-          slidesToShow={this.state.slidesToShow}
-          wrapAround={this.state.wrapAround}
-          slideIndex={this.state.slideIndex}
-          renderTopCenterControls={({ currentSlide }) => (
-            <div
-              style={{
-                fontFamily: 'Helvetica',
-                color: '#fff',
-                textDecoration: this.state.underlineHeader
-                  ? 'underline'
-                  : 'none'
-              }}
-            >
-              Nuka Carousel: Slide {currentSlide + 1}
-            </div>
-          )}
-        >
-          {colors
-            .slice(0, this.state.length)
-            .map((color, index) => (
+        <div style={{ height: '100vh' }}>
+          <Carousel
+            transitionMode={this.state.transitionMode}
+            cellAlign={this.state.cellAlign}
+            slidesToShow={this.state.slidesToShow}
+            wrapAround={this.state.wrapAround}
+            slideIndex={this.state.slideIndex}
+            fullScreen
+            renderTopCenterControls={({ currentSlide }) => (
+              <div
+                style={{
+                  fontFamily: 'Helvetica',
+                  color: '#fff',
+                  textDecoration: this.state.underlineHeader
+                    ? 'underline'
+                    : 'none'
+                }}
+              >
+                Nuka Carousel: Slide {currentSlide + 1}
+              </div>
+            )}
+          >
+            {colors.slice(0, this.state.length).map((color, index) => (
               <img
                 src={`http://placehold.it/1000x400/${color}/ffffff/&text=slide${index +
                   1}`}
@@ -57,7 +57,8 @@ class App extends React.Component {
                 onClick={this.handleImageClick}
               />
             ))}
-        </Carousel>
+          </Carousel>
+        </div>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div>
             <button onClick={() => this.setState({ slideIndex: 0 })}>1</button>

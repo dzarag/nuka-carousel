@@ -731,7 +731,7 @@ export default class Carousel extends React.Component {
       : this.props.initialSlideWidth || 0;
     const slideHeight = this.props.vertical
       ? (this.props.initialSlideHeight || 0) * this.state.slidesToShow
-      : this.props.initialSlideHeight || 0;
+      : this.props.initialSlideHeight || this.props.fullScreen ? '100%' : 0;
 
     const frameHeight =
       slideHeight + this.props.cellSpacing * (this.state.slidesToShow - 1);
@@ -861,7 +861,7 @@ export default class Carousel extends React.Component {
       position: 'relative',
       display: 'block',
       overflow: this.props.frameOverflow,
-      height: this.props.vertical ? this.state.frameWidth || 'initial' : 'auto',
+      height: this.props.vertical ? this.state.frameWidth || 'initial' : this.props.fullScreen ? '100%' : 'auto',
       margin: this.props.framePadding,
       padding: 0,
       transform: 'translate3d(0, 0, 0)',
@@ -878,7 +878,7 @@ export default class Carousel extends React.Component {
       position: 'relative',
       display: 'block',
       width: this.props.width,
-      height: 'auto',
+      height: this.props.fullScreen ? '100%' : 'auto',
       boxSizing: 'border-box',
       MozBoxSizing: 'border-box',
       visibility: this.state.slideWidth ? 'inherit' : 'hidden'
@@ -1116,6 +1116,7 @@ Carousel.propTypes = {
   edgeEasing: PropTypes.string,
   frameOverflow: PropTypes.string,
   framePadding: PropTypes.string,
+  fullScreen: PropTypes.bool,
   heightMode: PropTypes.oneOf(['first', 'current', 'max']),
   transitionMode: PropTypes.oneOf(['scroll', 'fade']),
   initialSlideHeight: PropTypes.number,
@@ -1157,6 +1158,7 @@ Carousel.defaultProps = {
   edgeEasing: 'easeElasticOut',
   framePadding: '0px',
   frameOverflow: 'hidden',
+  fullScreen: false,
   heightMode: 'max',
   transitionMode: 'scroll',
   onResize() {},
